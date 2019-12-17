@@ -10,6 +10,7 @@ function Get-ErrorDetail
     .EXAMPLE
         TBD
     #>
+    #[Diagnostics.CodeAnalysis.SuppressMessageAttribute("PS", "",Scope="function",Justification="")]
     Param (
         [Parameter(Mandatory,ValueFromPipeline)]
         $e

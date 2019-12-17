@@ -11,7 +11,7 @@ Function Prompt-ForBuildBreak {
     .EXAMPLE
         TBD
     #>
-    #PSUseApprovedVerbs
+    [Diagnostics.CodeAnalysis.SuppressMessageAttribute("PSUseApprovedVerbs", "",Scope="function",Justification="")]
     param (
         [Parameter(Position=0)]
         [System.Object]$LastError,

@@ -19,6 +19,7 @@ function Get-BuildEnvironment {
     #>
 
     [CmdletBinding()]
+    #[Diagnostics.CodeAnalysis.SuppressMessageAttribute("PS", "",Scope="function",Justification="")]
     param(
         [parameter(Position = 0, ValueFromPipeline = $TRUE)]
         [String]$Path

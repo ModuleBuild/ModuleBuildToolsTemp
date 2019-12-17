@@ -13,6 +13,7 @@ function Out-Zip {
     .EXAMPLE
         TBD
     #>
+    #[Diagnostics.CodeAnalysis.SuppressMessageAttribute("PS", "",Scope="function",Justification="")]
     param (
         [Parameter(Position=0, Mandatory=$true)]
         [string] $Directory,

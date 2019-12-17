@@ -1,0 +1,17 @@
+TOPIC
+    about_ModuleBuildToolsTemp
+
+SHORT DESCRIPTION
+    ModuleBuildToolsTemp
+
+LONG DESCRIPTION
+    ModuleBuildToolsTemp
+
+EXAMPLES
+    TBD
+
+KEYWORDS
+    ModuleBuildToolsTemp
+
+SEE ALSO
+    https://github.com/justin-p/ModuleBuildToolsTemp

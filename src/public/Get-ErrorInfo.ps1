@@ -9,6 +9,7 @@ function Get-ErrorInfo {
     .EXAMPLE
         TBD
     #>
+    #[Diagnostics.CodeAnalysis.SuppressMessageAttribute("PS", "",Scope="function",Justification="")]
     param (
         [Parameter(ValueFrompipeline)]
         [Management.Automation.ErrorRecord]$errorRecord

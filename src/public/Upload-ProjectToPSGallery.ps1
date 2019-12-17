@@ -17,7 +17,7 @@
         Site: http://www.the-little-things.net/
         #>
     [CmdletBinding()]
-    #PSUseApprovedVerbs
+    [Diagnostics.CodeAnalysis.SuppressMessageAttribute("PSUseApprovedVerbs", "",Scope="function",Justification="")]
     param(
         [parameter(Mandatory=$true, HelpMessage='Name of the module to upload.')]
         [string]$Name,

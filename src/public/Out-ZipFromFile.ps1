@@ -14,6 +14,7 @@ function Out-ZipFromFile {
         TBD
     #>
     [cmdletbinding()]
+    #[Diagnostics.CodeAnalysis.SuppressMessageAttribute("PS", "",Scope="function",Justification="")]
     param (
         [Parameter(Position=0, Mandatory=$true, ValueFromPipeline=$true)]
         [string[]]$Files,

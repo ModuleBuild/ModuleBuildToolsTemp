@@ -21,6 +21,7 @@ function Remove-Signature
     #>
 
     [CmdletBinding( SupportsShouldProcess = $true )]
+    #[Diagnostics.CodeAnalysis.SuppressMessageAttribute("PS", "",Scope="function",Justification="")]
     Param (
         [Parameter(ValueFromPipeline = $True,ValueFromPipelineByPropertyName = $True)]
         [Alias('FilePath')]

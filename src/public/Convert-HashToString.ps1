@@ -13,6 +13,7 @@ function Convert-HashToString
         TBD
     #>
     [cmdletbinding()]
+    #[Diagnostics.CodeAnalysis.SuppressMessageAttribute("PS", "",Scope="function",Justification="")]
     Param  (
         [Parameter(Mandatory=$true,Position=0)]
         [Hashtable]$Hashtable,

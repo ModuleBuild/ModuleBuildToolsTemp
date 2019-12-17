@@ -7,6 +7,7 @@ Function Get-SpecialPaths {
     .EXAMPLE
         TBD
     #>
+    [Diagnostics.CodeAnalysis.SuppressMessageAttribute("PSUseSingularNouns", "",Scope="function",Justification="")]
     Param (
 
     )

@@ -17,7 +17,7 @@ Function Set-BuildEnvironment {
     #>
 
     [CmdletBinding()]
-    #PSUseShouldProcessForStateChangingFunctions
+    [Diagnostics.CodeAnalysis.SuppressMessageAttribute("PSUseShouldProcessForStateChangingFunctions", "",Scope="function",Justification="")]
     param(
         [parameter(Position = 0, ValueFromPipeline = $TRUE)]
         [String]$Path

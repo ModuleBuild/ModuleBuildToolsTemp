@@ -12,6 +12,7 @@ function Convert-ArrayToString {
     TBD
     #>
     [cmdletbinding()]
+    #[Diagnostics.CodeAnalysis.SuppressMessageAttribute("PS", "",Scope="function",Justification="")]
     Param (
         [Parameter(Mandatory=$true,Position=0)]
         [AllowEmptyCollection()]

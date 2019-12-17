@@ -31,7 +31,7 @@ function New-PSGalleryProjectProfile {
         1.0.0 - Initial release
         #>
     [CmdletBinding()]
-    #PSUseShouldProcessForStateChangingFunctions
+    [Diagnostics.CodeAnalysis.SuppressMessageAttribute("PSUseShouldProcessForStateChangingFunctions", "",Scope="function",Justification="")]
     param(
         [parameter(Position=0, Mandatory=$true, HelpMessage='Path of module project files to upload.')]
         [string]$Path,

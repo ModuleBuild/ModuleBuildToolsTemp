@@ -26,6 +26,7 @@ function Get-FunctionParameter {
                 Added ScriptParameters parameter to include parameters for a script (not just ones associated with defined functions)
     #>
     [CmdletBinding()]
+    #[Diagnostics.CodeAnalysis.SuppressMessageAttribute("PS", "",Scope="function",Justification="")]
     param(
         [parameter(ValueFromPipeline=$true, HelpMessage='Lines of code to process.')]
         [string[]]$Code,
@@ -61,7 +62,7 @@ function Get-FunctionParameter {
         if (-not $ScriptParameters) {
             $functions = $ast.FindAll($functionpredicate, $true)
             if (-not [string]::IsNullOrEmpty($Name)) {
-                $functions = $functions | where {$_.Name -eq $Name}
+                $functions = $functions | Where-Object {$_.Name -eq $Name}
             }
             # get the begin and end positions of every for loop
             foreach ($function in $functions) {
@@ -76,7 +77,7 @@ function Get-FunctionParameter {
                         'ParameterType' = $ParamType[0].typeName.FullName
                     }
                     # This will add in any other parameter attributes if they are specified (default attributes are thus not included and output may not be normalized)
-                    $p.FindAll($paramattributes, $true) | Foreach {
+                    $p.FindAll($paramattributes, $true) | ForEach-Object {
                         $OutProps.($_.ArgumentName) = $_.Argument.Value
                     }
                     $Output += New-Object -TypeName PSObject -Property $OutProps
@@ -97,7 +98,7 @@ function Get-FunctionParameter {
                         'ParameterType' = $ParamType[0].typeName.FullName
                     }
                     # This will add in any other parameter attributes if they are specified (default attributes are thus not included and output may not be normalized)
-                    $p.FindAll($paramattributes, $true) | Foreach {
+                    $p.FindAll($paramattributes, $true) | ForEach-Object {
                         $OutProps.($_.ArgumentName) = $_.Argument.Value
                     }
                     $Output += New-Object -TypeName PSObject -Property $OutProps

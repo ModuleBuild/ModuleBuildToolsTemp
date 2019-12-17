@@ -32,7 +32,7 @@
        1.0.2 - Update for ModuleBuild. Base64 workaround for CBH variables. This was added since having the % % strings caused the top part of the function to be removed during a build.
     #>
     [CmdletBinding()]
-    #PSUseShouldProcessForStateChangingFunctions
+    [Diagnostics.CodeAnalysis.SuppressMessageAttribute("PSUseShouldProcessForStateChangingFunctions", "",Scope="function",Justification="")]
     param(
         [parameter(Position=0, ValueFromPipeline=$true, HelpMessage='Lines of code to process.')]
         [string[]]$Code,
@@ -50,7 +50,7 @@
         $Codeblock += $Code
     }
     end {
-        $ScriptText = ($Codeblock | Out-String).trim("`r`n")
+        #$ScriptText = ($Codeblock | Out-String).trim("`r`n")
         Write-Verbose "$($FunctionName): Attempting to parse parameters."
         $FuncParams = @{}
         if ($ScriptParameters) {
@@ -63,8 +63,8 @@
             $OutCBH = @{}
             $OutCBH.FunctionName = $f
             [string]$OutParams = ''
-            $fparams = @($AllParams | Where {$_.FunctionName -eq $f} | Sort-Object -Property Position)
-            $fparams | foreach {
+            $fparams = @($AllParams | Where-Object {$_.FunctionName -eq $f} | Sort-Object -Property Position)
+            $fparams | ForEach-Object {
                 $ParamHelpMessage = if ([string]::IsNullOrEmpty($_.HelpMessage)) {$_.ParameterName + " explanation`n`r"} else { $_.HelpMessage + "`n`r"}
                 $OutParams += $CBH_PARAM -replace '%%PARAM%%',$_.ParameterName -replace '%%PARAMHELP%%',$ParamHelpMessage
             }

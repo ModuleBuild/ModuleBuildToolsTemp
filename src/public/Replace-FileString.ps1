@@ -78,7 +78,7 @@ function Replace-FileString {
     #>
 
     [CmdletBinding(DefaultParameterSetName="Path",SupportsShouldProcess=$TRUE)]
-    #PSUseApprovedVerbs
+    [Diagnostics.CodeAnalysis.SuppressMessageAttribute("PSUseApprovedVerbs", "",Scope="function",Justification="")]
     param(
     [parameter(Mandatory=$TRUE,Position=0)]
         [String] $Pattern,
