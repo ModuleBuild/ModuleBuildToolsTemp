@@ -1,4 +1,5 @@
-function New-PSGalleryProjectProfile {
+#Requires -version 5
+function Script:New-PSGalleryProjectProfile {
     <#
         .SYNOPSIS
             Create a powershell Gallery module upload profile
@@ -19,7 +20,7 @@ function New-PSGalleryProjectProfile {
         .PARAMETER IconUri
             Icon web path.
         .PARAMETER NuGetApiKey
-            API key for the powershellgallery.com site.
+            API key for the powershellgallery.com site. 
         .PARAMETER OutputFile
             OutputFile (default is .psgallery)
 
@@ -31,7 +32,6 @@ function New-PSGalleryProjectProfile {
         1.0.0 - Initial release
         #>
     [CmdletBinding()]
-    #PSUseShouldProcessForStateChangingFunctions
     param(
         [parameter(Position=0, Mandatory=$true, HelpMessage='Path of module project files to upload.')]
         [string]$Path,

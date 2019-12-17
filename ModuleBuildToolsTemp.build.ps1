@@ -56,7 +56,8 @@ task LoadRequiredModules {
 
     if ((Get-Module PSDepend -ListAvailable) -eq $null) {
         Write-Description White "Installing PSDepend Module" -Level 2
-        $null = Install-Module PSDepend -Scope:CurrentUser
+        Install-Module PSDepend -Scope:CurrentUser
+        Import-Module PSDepend
     }
 
     $PSDependFolder = $(Join-Path $Script:BuildEnv.BuildToolFolder 'PSDepend')
@@ -373,10 +374,10 @@ task CreateModulePSM1 RemoveScriptSignatures, UpdateCBH, {
     }
     else {
         Write-Description White 'Option to combine PSM1 is NOT enabled, copying over file structure now...' -Level 2
-        Copy-Item -Path (Join-Path $ScratchPath $Script:BuildEnv.OtherModuleSource) -Recurse -Destination $StageReleasePath -Force
-        Copy-Item -Path (Join-Path $ScratchPath $Script:BuildEnv.PrivateFunctionSource) -Recurse -Destination $StageReleasePath -Force
-        Copy-Item -Path (Join-Path $ScratchPath $Script:BuildEnv.PublicFunctionSource) -Recurse -Destination $StageReleasePath -Force
-        Copy-Item -Path (Join-Path $ScratchPath $Script:BuildEnv.ModuleToBuild) -Destination $StageReleasePath -Force
+        Copy-Item -Path $(Join-Path $ScratchPath $Script:BuildEnv.OtherModuleSource) -Recurse -Destination $StageReleasePath -Force
+        Copy-Item -Path $(Join-Path $ScratchPath $Script:BuildEnv.PrivateFunctionSource) -Recurse -Destination $StageReleasePath -Force
+        Copy-Item -Path $(Join-Path $ScratchPath $Script:BuildEnv.PublicFunctionSource) -Recurse -Destination $StageReleasePath -Force
+        Copy-Item -Path "$(Join-Path $ScratchPath $Script:BuildEnv.ModuleToBuild).ps*" -Destination $StageReleasePath -Force
     }
 
     if (($Script:BuildEnv.AdditionalModulePaths).Count -gt 0) {

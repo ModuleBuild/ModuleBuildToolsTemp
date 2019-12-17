@@ -1,4 +1,4 @@
-function Replace-FileString {
+function Script:Replace-FileString {
     <#
     .SYNOPSIS
     Replaces strings in files using a regular expression.
@@ -77,8 +77,8 @@ function Replace-FileString {
     the file Ferb.txt and overwrites the file.
     #>
 
-    [CmdletBinding(DefaultParameterSetName="Path",SupportsShouldProcess=$TRUE)]
-    #PSUseApprovedVerbs
+    [CmdletBinding(DefaultParameterSetName="Path",
+                SupportsShouldProcess=$TRUE)]
     param(
     [parameter(Mandatory=$TRUE,Position=0)]
         [String] $Pattern,

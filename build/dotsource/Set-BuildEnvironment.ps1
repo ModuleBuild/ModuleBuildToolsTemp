@@ -1,4 +1,5 @@
-Function Set-BuildEnvironment {
+
+function Script:Set-BuildEnvironment {
     <#
     .SYNOPSIS
     Sets a stored setting in a buildenvironment.json file.
@@ -17,7 +18,6 @@ Function Set-BuildEnvironment {
     #>
 
     [CmdletBinding()]
-    #PSUseShouldProcessForStateChangingFunctions
     param(
         [parameter(Position = 0, ValueFromPipeline = $TRUE)]
         [String]$Path
@@ -26,7 +26,7 @@ Function Set-BuildEnvironment {
         # Create dictionary
         $DynamicParameters = New-Object System.Management.Automation.RuntimeDefinedParameterDictionary
         if ([String]::isnullorempty($Path)) {
-            $BuildPath = (Get-ChildItem -File -Filter "*.buildenvironment.json" -Path '.\','..\','.\build\' | Select-Object -First 1).FullName
+            $BuildPath = (Get-ChildItem -File -Filter "*.buildenvironment.json" -Path '.\','..\','.\build\' | select -First 1).FullName
         }
         else {
             $BuildPath = $Path
@@ -50,7 +50,7 @@ Function Set-BuildEnvironment {
                 }
             }
             catch {
-                throw "Unable to load the build file in $BuildPath"
+                #throw "Unable to load the build file in $BuildPath"
             }
         }
 
@@ -63,7 +63,7 @@ Function Set-BuildEnvironment {
             Get-CallerPreference -Cmdlet $PSCmdlet -SessionState $ExecutionContext.SessionState
         }
         if ([String]::isnullorempty($Path)) {
-            $BuildPath = (Get-ChildItem -File -Filter "*.buildenvironment.json" -Path '.\','..\','.\build\' | Select-Object -First 1).FullName
+            $BuildPath = (Get-ChildItem -File -Filter "*.buildenvironment.json" -Path '.\','..\','.\build\' | select -First 1).FullName
         }
         else {
             $BuildPath = $Path

@@ -1,4 +1,5 @@
-﻿function Upload-ProjectToPSGallery {
+﻿#Requires -version 5
+function Script:Upload-ProjectToPSGallery {
     <#
         .SYNOPSIS
             Upload module project to Powershell Gallery
@@ -17,7 +18,6 @@
         Site: http://www.the-little-things.net/
         #>
     [CmdletBinding()]
-    #PSUseApprovedVerbs
     param(
         [parameter(Mandatory=$true, HelpMessage='Name of the module to upload.')]
         [string]$Name,

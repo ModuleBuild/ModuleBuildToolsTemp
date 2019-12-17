@@ -1,17 +1,4 @@
-Function Prompt-ForBuildBreak {
-    <#
-    .SYNOPSIS
-        TBD
-    .DESCRIPTION
-        TBD
-    .PARAMETER LastError
-        TBD
-    .PARAMETER CustomError
-        TBD
-    .EXAMPLE
-        TBD
-    #>
-    #PSUseApprovedVerbs
+Function Script:Prompt-ForBuildBreak {
     param (
         [Parameter(Position=0)]
         [System.Object]$LastError,
