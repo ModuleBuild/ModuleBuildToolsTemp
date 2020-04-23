@@ -1,6 +1,6 @@
 ﻿---
 Module Name: ModuleBuildToolsTemp
-Module Guid: c93e4433-f934-4406-8cd7-b96ec67cc04b 3feece34-3271-4f18-b81e-40d10d232293
+Module Guid: c93e4433-f934-4406-8cd7-b96ec67cc04b c93e4433-f934-4406-8cd7-b96ec67cc04b
 Download Help Link: https://www.github.com/justin-p/ModuleBuildToolsTemp/release/ModuleBuildToolsTemp/docs/ModuleBuildToolsTemp.md
 Help Version: 0.0.7
 Locale: en-US
