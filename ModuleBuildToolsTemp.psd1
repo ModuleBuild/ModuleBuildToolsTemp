@@ -12,7 +12,7 @@
 RootModule = 'ModuleBuildToolsTemp.psm1'
 
 # Version number of this module.
-ModuleVersion = '0.0.2'
+ModuleVersion = '0.0.3'
 
 # Supported PSEditions
 # CompatiblePSEditions = @()
@@ -107,7 +107,7 @@ PrivateData = @{
         IconUri = 'https://github.com/justin-p/ModuleBuildToolsTemp/raw/master/src/other/powershell-project.png'
 
         # ReleaseNotes of this module
-        # ReleaseNotes = ''
+        ReleaseNotes = '0.0.3 release'
 
         # Prerelease string of this module
         # Prerelease = ''
