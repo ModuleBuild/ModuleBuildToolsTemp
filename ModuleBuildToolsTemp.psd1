@@ -18,7 +18,7 @@ ModuleVersion = '0.0.6'
 # CompatiblePSEditions = @()
 
 # ID used to uniquely identify this module
-GUID = '3feece34-3271-4f18-b81e-40d10d232293'
+GUID = 'c93e4433-f934-4406-8cd7-b96ec67cc04b'
 
 # Author of this module
 Author = 'Justin Perdok'
@@ -27,10 +27,10 @@ Author = 'Justin Perdok'
 CompanyName = ' '
 
 # Copyright statement for this module
-Copyright = '(c) 2019  . All rights reserved.'
+Copyright = '(c) 2020  . All rights reserved.'
 
 # Description of the functionality provided by this module
-Description = 'ModuleBuildToolsTemp'
+Description = 'Builder tools for the ModuleBuild project'
 
 # Minimum version of the Windows PowerShell engine required by this module
 # PowerShellVersion = ''
@@ -75,7 +75,7 @@ FunctionsToExport = '*'
 CmdletsToExport = '*'
 
 # Variables to export from this module
-# VariablesToExport = @()
+VariablesToExport = @()
 
 # Aliases to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no aliases to export.
 AliasesToExport = @()
@@ -95,32 +95,23 @@ PrivateData = @{
     PSData = @{
 
         # Tags applied to this module. These help with module discovery in online galleries.
-        Tags = 'ModuleBuildToolsTemp'
+        Tags = 'ModuleBuild'
 
         # A URL to the license for this module.
-        LicenseUri = 'https://github.com/justin-p/ModuleBuildToolsTemp/raw/master/LICENSE.md'
+        LicenseUri = 'https://www.github.com/justin-p/ModuleBuildToolsTemp/raw/master/LICENSE.md'
 
         # A URL to the main website for this project.
-        ProjectUri = 'https://github.com/justin-p/ModuleBuildToolsTemp'
+        ProjectUri = 'https://www.github.com/justin-p/ModuleBuildToolsTemp'
 
         # A URL to an icon representing this module.
-        IconUri = 'https://github.com/justin-p/ModuleBuildToolsTemp/raw/master/src/other/powershell-project.png'
+        IconUri = 'https://www.github.com/justin-p/ModuleBuildToolsTemp/raw/master/src/other/powershell-project.png'
 
         # ReleaseNotes of this module
-        ReleaseNotes = '0.0.6 release'
-
-        # Prerelease string of this module
-        # Prerelease = ''
-
-        # Flag to indicate whether the module requires explicit user acceptance for install/update/save
-        # RequireLicenseAcceptance = $false
-
-        # External dependent modules of this module
-        # ExternalModuleDependencies = @()
+        # ReleaseNotes = ''
 
     } # End of PSData hashtable
 
- } # End of PrivateData hashtable
+} # End of PrivateData hashtable
 
 # HelpInfo URI of this module
 # HelpInfoURI = ''
@@ -129,4 +120,5 @@ PrivateData = @{
 # DefaultCommandPrefix = ''
 
 }
+
 

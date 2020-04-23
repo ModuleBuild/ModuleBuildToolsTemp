@@ -1,10 +1,10 @@
 # Run this in an administrative PowerShell prompt to install the ModuleBuildToolsTemp PowerShell module:
 #
-# 	iex (New-Object Net.WebClient).DownloadString("https://github.com/justin-p/ModuleBuildToolsTemp/raw/master/Install.ps1")
+# iex (New-Object Net.WebClient).DownloadString("https://www.github.com/justin-p/ModuleBuildToolsTemp/raw/master/Install.ps1")
 
 # Some general variables
 $ModuleName = 'ModuleBuildToolsTemp'
-$DownloadURL = 'https://github.com/justin-p/ModuleBuildToolsTemp/raw/master/release/ModuleBuildToolsTemp-current.zip'
+$DownloadURL = 'https://www.github.com/justin-p/ModuleBuildToolsTemp/raw/master/release/ModuleBuildToolsTemp-current.zip'
 
 # Download and install the module
 $webclient = New-Object System.Net.WebClient

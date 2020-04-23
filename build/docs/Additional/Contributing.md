@@ -1,6 +1,6 @@
 # Contributing to ModuleBuildToolsTemp
 
-Project Site: [https://github.com/justin-p/ModuleBuildToolsTemp](https://github.com/justin-p/ModuleBuildToolsTemp)
+Project Site: [https://www.github.com/justin-p/ModuleBuildToolsTemp](https://www.github.com/justin-p/ModuleBuildToolsTemp)
 
 There are some important things to be aware of if you plan on contributing to this project.
 

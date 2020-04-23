@@ -1,16 +1,16 @@
 # ModuleBuildToolsTemp
-ModuleBuildToolsTemp
+Builder tools for the ModuleBuild project
 
-Project Site: [https://github.com/justin-p/ModuleBuildToolsTemp](https://github.com/justin-p/ModuleBuildToolsTemp)
+Project Site: [https://www.github.com/justin-p/ModuleBuildToolsTemp](https://www.github.com/justin-p/ModuleBuildToolsTemp)
 
 ## What is ModuleBuildToolsTemp?
-ModuleBuildToolsTemp
+Builder tools for the ModuleBuild project
 
 ## Why use the ModuleBuildToolsTemp Module?
-
+<< Fill this out >>
 
 ### Features
-
+<< Fill this out >>
 
 ## Installation
 ModuleBuildToolsTemp is available on the [PowerShell Gallery](https://www.powershellgallery.com/packages/ModuleBuildToolsTemp/).
