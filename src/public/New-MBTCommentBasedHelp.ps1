@@ -56,7 +56,7 @@
         if ($ScriptParameters) {
             $FuncParams.ScriptParameters = $true
         }
-        $AllParams = Get-MBHFunctionParameter @FuncParams -Code $Codeblock | Sort-Object -Property FunctionName
+        $AllParams = Get-MBTFunctionParameter @FuncParams -Code $Codeblock | Sort-Object -Property FunctionName
         $AllFunctions = @($AllParams.FunctionName | Select-Object -unique)
 
         foreach ($f in $AllFunctions) {
