@@ -14,7 +14,7 @@ Upload module project to Powershell Gallery
 
 ```
 Publish-MBTProjectToPSGallery [-Name] <String> [[-Repository] <String>] [[-NuGetApiKey] <String>]
- [<CommonParameters>]
+ [[-RequiredVersion] <Object>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -69,6 +69,21 @@ Aliases:
 
 Required: False
 Position: 3
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -RequiredVersion
+Version to upload.
+
+```yaml
+Type: Object
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 4
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False

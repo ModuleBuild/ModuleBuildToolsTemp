@@ -1,21 +1,21 @@
 ﻿function Publish-MBTProjectToPSGallery {
     <#
-        .SYNOPSIS
-            Upload module project to Powershell Gallery
-        .DESCRIPTION
-            Upload module project to Powershell Gallery
-        .PARAMETER Name
-            Path to module to upload.
-        .PARAMETER Repository
-            Destination gallery (default is PSGallery)
-        .PARAMETER NuGetApiKey
-            API key for the powershellgallery.com site.
-        .EXAMPLE
-            .\Publish-MBTProjectToPSGallery.ps1
-        .NOTES
-        Author: Zachary Loeber
-        Site: http://www.the-little-things.net/
-        #>
+    .SYNOPSIS
+        Upload module project to Powershell Gallery
+    .DESCRIPTION
+        Upload module project to Powershell Gallery
+    .PARAMETER Name
+        Path to module to upload.
+    .PARAMETER Repository
+        Destination gallery (default is PSGallery)
+    .PARAMETER NuGetApiKey
+        API key for the powershellgallery.com site.
+    .EXAMPLE
+        .\Publish-MBTProjectToPSGallery.ps1
+    .NOTES
+    Author: Zachary Loeber
+    Site: http://www.the-little-things.net/
+    #>
     [CmdletBinding()]
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute("PSUseApprovedVerbs", "",Scope="function",Justification="")]
     param(
@@ -24,7 +24,9 @@
         [parameter(HelpMessage='Destination gallery (default is PSGallery)')]
         [string]$Repository = 'PSGallery',
         [parameter(HelpMessage='API key for the powershellgallery.com site.')]
-        [string]$NuGetApiKey
+        [string]$NuGetApiKey,
+        [parameter(HelpMessage='Version to upload.')]
+        $RequiredVersion
     )
     # if no API key is defined then look for psgalleryapi.txt in the local profile directory and try to use it instead.
     if ([string]::IsNullOrEmpty($NuGetApiKey)) {
@@ -39,5 +41,5 @@
         }
     }
 
-    Publish-Module -Name $Name -NuGetApiKey $NuGetApiKey -Repository $Repository
+    Publish-Module -Name $Name -NuGetApiKey $NuGetApiKey -Repository $Repository -RequiredVersion $RequiredVersion
 }

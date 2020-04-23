@@ -219,7 +219,7 @@ function Publish-MBTProjectToPSGallery {
     <#
         .EXTERNALHELP ModuleBuildToolsTemp-help.xml
         .LINK
-            https://www.github.com/justin-p/ModuleBuildToolsTemp/tree/master/release/0.0.6/docs/Upload-MBTProjectToPSGallery.md
+            https://www.github.com/justin-p/ModuleBuildToolsTemp/tree/master/release/0.0.6/docs/Publish-MBTProjectToPSGallery.md
         #>
     [CmdletBinding()]
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute("PSUseApprovedVerbs", "",Scope="function",Justification="")]
@@ -229,7 +229,9 @@ function Publish-MBTProjectToPSGallery {
         [parameter(HelpMessage='Destination gallery (default is PSGallery)')]
         [string]$Repository = 'PSGallery',
         [parameter(HelpMessage='API key for the powershellgallery.com site.')]
-        [string]$NuGetApiKey
+        [string]$NuGetApiKey,
+        [parameter(HelpMessage='Version to upload.')]
+        $RequiredVersion
     )
     # if no API key is defined then look for psgalleryapi.txt in the local profile directory and try to use it instead.
     if ([string]::IsNullOrEmpty($NuGetApiKey)) {
@@ -244,7 +246,7 @@ function Publish-MBTProjectToPSGallery {
         }
     }
 
-    Publish-Module -Name $Name -NuGetApiKey $NuGetApiKey -Repository $Repository
+    Publish-Module -Name $Name -NuGetApiKey $NuGetApiKey -Repository $Repository -RequiredVersion $RequiredVersion
 }
 
 

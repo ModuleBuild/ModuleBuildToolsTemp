@@ -71,8 +71,9 @@ Description = 'Builder tools for the ModuleBuild project'
 # Functions to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no functions to export.
 FunctionsToExport = 'Get-MBTBuildEnvironment', 'Get-MBTFunctionParameter', 
                'Get-MBTSpecialPath', 'New-MBTCommentBasedHelp', 
-               'New-MBTDynamicParameter', 'Out-MBTZip', 'Remove-MBTSignature', 
-               'Set-MBTBuildEnvironment', 'Publish-MBTProjectToPSGallery'
+               'New-MBTDynamicParameter', 'Out-MBTZip', 
+               'Publish-MBTProjectToPSGallery', 'Remove-MBTSignature', 
+               'Set-MBTBuildEnvironment'
 
 # Cmdlets to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no cmdlets to export.
 CmdletsToExport = '*'

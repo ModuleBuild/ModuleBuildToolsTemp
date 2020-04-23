@@ -75,7 +75,7 @@ FunctionsToExport = '*'
 CmdletsToExport = '*'
 
 # Variables to export from this module
-VariablesToExport = @()
+# VariablesToExport = @()
 
 # Aliases to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no aliases to export.
 AliasesToExport = @()
@@ -109,9 +109,18 @@ PrivateData = @{
         # ReleaseNotes of this module
         # ReleaseNotes = ''
 
+        # Prerelease string of this module
+        # Prerelease = ''
+
+        # Flag to indicate whether the module requires explicit user acceptance for install/update/save
+        # RequireLicenseAcceptance = $false
+
+        # External dependent modules of this module
+        # ExternalModuleDependencies = @()
+
     } # End of PSData hashtable
 
-} # End of PrivateData hashtable
+ } # End of PrivateData hashtable
 
 # HelpInfo URI of this module
 # HelpInfoURI = ''
@@ -120,5 +129,4 @@ PrivateData = @{
 # DefaultCommandPrefix = ''
 
 }
-
 

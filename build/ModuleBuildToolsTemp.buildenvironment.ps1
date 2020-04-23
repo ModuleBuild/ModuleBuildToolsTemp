@@ -42,7 +42,7 @@ if ((Get-Variable 'BuildEnv' -ErrorAction:SilentlyContinue) -eq $null) {
 
         # If you want to update your current module build version automatically
         # after a successful psgallery publish set this to $true
-        OptionUpdateVersionAfterPublishing = $True
+        OptionUpdateVersionAfterPublishing = $false
 
         # Additional paths in the source module which should be copied over to the final build release
         AdditionalModulePaths = @('plugins')
