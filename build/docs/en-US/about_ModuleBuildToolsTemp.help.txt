@@ -1,17 +1,17 @@
 TOPIC
-    about_ModuleBuildTools
+    about_ModuleBuildToolsTemp
 
 SHORT DESCRIPTION
-    Builder tools for the ModuleBuild project
+    ModuleBuildToolsTemp
 
 LONG DESCRIPTION
-    Builder tools for the ModuleBuild project
+    ModuleBuildToolsTemp
 
 EXAMPLES
     TBD
 
 KEYWORDS
-    ModuleBuild
+    modulebuildtools
 
 SEE ALSO
     https://www.github.com/justin-p/ModuleBuildToolsTemp

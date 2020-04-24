@@ -18,7 +18,7 @@ ModuleVersion = '0.0.8'
 # CompatiblePSEditions = @()
 
 # ID used to uniquely identify this module
-GUID = 'c93e4433-f934-4406-8cd7-b96ec67cc04b'
+GUID = '79365040-e2e9-4c74-aba1-c9e635e68ccd'
 
 # Author of this module
 Author = 'Justin Perdok'
@@ -30,7 +30,7 @@ CompanyName = ' '
 Copyright = '(c) 2020  . All rights reserved.'
 
 # Description of the functionality provided by this module
-Description = 'Builder tools for the ModuleBuild project'
+Description = 'ModuleBuildToolsTemp'
 
 # Minimum version of the Windows PowerShell engine required by this module
 # PowerShellVersion = ''
@@ -75,7 +75,7 @@ FunctionsToExport = '*'
 CmdletsToExport = '*'
 
 # Variables to export from this module
-# VariablesToExport = @()
+VariablesToExport = @()
 
 # Aliases to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no aliases to export.
 AliasesToExport = @()
@@ -95,7 +95,7 @@ PrivateData = @{
     PSData = @{
 
         # Tags applied to this module. These help with module discovery in online galleries.
-        Tags = 'ModuleBuild'
+        Tags = 'modulebuildtools'
 
         # A URL to the license for this module.
         LicenseUri = 'https://www.github.com/justin-p/ModuleBuildToolsTemp/raw/master/LICENSE.md'
@@ -109,18 +109,9 @@ PrivateData = @{
         # ReleaseNotes of this module
         # ReleaseNotes = ''
 
-        # Prerelease string of this module
-        # Prerelease = ''
-
-        # Flag to indicate whether the module requires explicit user acceptance for install/update/save
-        # RequireLicenseAcceptance = $false
-
-        # External dependent modules of this module
-        # ExternalModuleDependencies = @()
-
     } # End of PSData hashtable
 
- } # End of PrivateData hashtable
+} # End of PrivateData hashtable
 
 # HelpInfo URI of this module
 # HelpInfoURI = ''
@@ -129,4 +120,5 @@ PrivateData = @{
 # DefaultCommandPrefix = ''
 
 }
+
 

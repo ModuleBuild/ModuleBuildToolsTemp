@@ -1,6 +1,6 @@
 ﻿---
 Module Name: ModuleBuildToolsTemp
-Module Guid: c93e4433-f934-4406-8cd7-b96ec67cc04b
+Module Guid: 79365040-e2e9-4c74-aba1-c9e635e68ccd
 Download Help Link: https://www.github.com/justin-p/ModuleBuildToolsTemp/release/ModuleBuildToolsTemp/docs/ModuleBuildToolsTemp.md
 Help Version: 0.0.8
 Locale: en-US
@@ -8,7 +8,7 @@ Locale: en-US
 
 # ModuleBuildToolsTemp Module
 ## Description
-Builder tools for the ModuleBuild project
+ModuleBuildToolsTemp
 
 ## ModuleBuildToolsTemp Cmdlets
 ### [Get-MBTSpecialPath](Get-MBTSpecialPath.md)

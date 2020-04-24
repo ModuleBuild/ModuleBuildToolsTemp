@@ -1,10 +1,10 @@
 # ModuleBuildToolsTemp
-Builder tools for the ModuleBuild project
+ModuleBuildToolsTemp
 
 Project Site: [https://www.github.com/justin-p/ModuleBuildToolsTemp](https://www.github.com/justin-p/ModuleBuildToolsTemp)
 
 ## What is ModuleBuildToolsTemp?
-Builder tools for the ModuleBuild project
+ModuleBuildToolsTemp
 
 ## Why use the ModuleBuildToolsTemp Module?
 << Fill this out >>
