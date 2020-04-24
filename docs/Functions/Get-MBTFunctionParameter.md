@@ -1,7 +1,7 @@
 ﻿---
 external help file: ModuleBuildToolsTemp-help.xml
 Module Name: ModuleBuildToolsTemp
-online version: https://github.com/zloeber/ModuleBuild
+online version:
 schema: 2.0.0
 ---
 
@@ -26,7 +26,9 @@ Return all parameters for each function found in a code block.
 $testfile = 'C:\temp\test.ps1'
 ```
 
-PS \> $test = Get-Content $testfile -raw PS \> $test | Get-FunctionParameter -ScriptParameters Takes C:\temp\test.ps1 as input, gathers any script's parameters and prints the output to the screen.
+PS \> $test = Get-Content $testfile -raw
+PS \> $test | Get-FunctionParameter -ScriptParameters
+Takes C:\temp\test.ps1 as input, gathers any script's parameters and prints the output to the screen.
 
 ## PARAMETERS
 
@@ -85,7 +87,13 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## OUTPUTS
 
 ## NOTES
-Author: Zachary Loeber Site: http://www.the-little-things.net/ Requires: Powershell 3.0 Version History 1.0.0 - Initial release 1.0.1 - Updated function name to remove plural format             Added Name parameter and logic for getting script parameters if no function is defined. 
-Added ScriptParameters parameter to include parameters for a script (not just ones associated with defined functions)
+Author: Zachary Loeber
+Site: http://www.the-little-things.net/
+Requires: Powershell 3.0
+Version History
+1.0.0 - Initial release
+1.0.1 - Updated function name to remove plural format
+            Added Name parameter and logic for getting script parameters if no function is defined.
+            Added ScriptParameters parameter to include parameters for a script (not just ones associated with defined functions)
 
 ## RELATED LINKS

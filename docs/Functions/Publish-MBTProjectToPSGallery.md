@@ -1,7 +1,7 @@
 ﻿---
 external help file: ModuleBuildToolsTemp-help.xml
 Module Name: ModuleBuildToolsTemp
-online version: https://github.com/zloeber/ModuleBuild
+online version:
 schema: 2.0.0
 ---
 
@@ -97,6 +97,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## OUTPUTS
 
 ## NOTES
-Author: Zachary Loeber Site: http://www.the-little-things.net/
+Author: Zachary Loeber
+Site: http://www.the-little-things.net/
 
 ## RELATED LINKS

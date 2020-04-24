@@ -1,7 +1,7 @@
 ﻿---
 external help file: ModuleBuildToolsTemp-help.xml
 Module Name: ModuleBuildToolsTemp
-online version: https://github.com/zloeber/ModuleBuild
+online version:
 schema: 2.0.0
 ---
 
@@ -26,9 +26,11 @@ Create comment based help for a function.
 $testfile = 'C:\temp\test.ps1'
 ```
 
-PS \> $test = Get-Content $testfile -raw PS \> $test | New-CommentBasedHelp | clip
+PS \> $test = Get-Content $testfile -raw
+PS \> $test | New-CommentBasedHelp | clip
 
-Takes C:\temp\test.ps1 as input, creates basic comment based help and puts the result in the clipboard to be pasted elsewhere for review.
+Takes C:\temp\test.ps1 as input, creates basic comment based help and puts the result in the clipboard
+to be pasted elsewhere for review.
 
 ### EXAMPLE 2
 ```
@@ -38,7 +40,8 @@ $CBH = Get-Content 'C:\EWSModule\Get-EWSContact.ps1' -Raw | New-CommentBasedHelp
 PS \> ($CBH | Where {$FunctionName -eq 'Get-EWSContact'}).CBH
 
 Consumes Get-EWSContact.ps1 and generates advanced CBH templates for all functions found within.
-Print out to the screen the advanced CBH for just the Get-EWSContact function.
+Print out to the screen the advanced
+CBH for just the Get-EWSContact function.
 
 ## PARAMETERS
 
@@ -80,9 +83,14 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## OUTPUTS
 
 ## NOTES
-Author: Zachary Loeber Site: http://www.the-little-things.net/ Requires: Powershell 3.0
+Author: Zachary Loeber
+Site: http://www.the-little-things.net/
+Requires: Powershell 3.0
 
-Version History 1.0.0 - Initial release 1.0.1 - Updated for ModuleBuild 1.0.2 - Update for ModuleBuild.
+Version History
+1.0.0 - Initial release
+1.0.1 - Updated for ModuleBuild
+1.0.2 - Update for ModuleBuild.
 Base64 workaround for CBH variables.
 This was added since having the % % strings caused the top part of the function to be removed during a build.
 
