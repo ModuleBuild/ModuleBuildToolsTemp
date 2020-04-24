@@ -16,7 +16,7 @@ if ((Get-Variable 'BuildEnv' -ErrorAction:SilentlyContinue) -eq $null) {
         ForceInstallModule = $False
         Encoding = 'utf8'
         ModuleToBuild = 'ModuleBuildToolsTemp'
-        ModuleVersion = '0.0.7'
+        ModuleVersion = '0.0.8'
         ModuleWebsite = 'https://www.github.com/justin-p/ModuleBuildToolsTemp'
         ModuleCopyright = "(c) $((get-date).Year.ToString()) Justin Perdok. All rights reserved."
         ModuleLicenseURI = 'https://www.github.com/justin-p/ModuleBuildToolsTemp/LICENSE.md'
