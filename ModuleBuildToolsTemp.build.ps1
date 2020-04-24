@@ -293,6 +293,7 @@ task RunIntergrationTests LoadRequiredModules, {
 task CreateMarkdownHelp GetPublicFunctions, {
     Write-Description White 'Creating markdown documentation with PlatyPS' -accent
 
+    $BuildToolPath = Join-Path $BuildRoot $Script:BuildEnv.BuildToolFolder
     $ScratchPath = Join-Path $BuildRoot $Script:BuildEnv.ScratchFolder
     $StageReleasePath = Join-Path $ScratchPath $Script:BuildEnv.BaseReleaseFolder
     Copy-Item -Path (Join-Path $ScratchPath "en-US") -Recurse -Destination $StageReleasePath -Force
@@ -300,9 +301,32 @@ task CreateMarkdownHelp GetPublicFunctions, {
     $FwLink = "$($OnlineModuleLocation)/$($Script:BuildEnv.ModuleToBuild)/docs/$($Script:BuildEnv.ModuleToBuild).md"
     $ModulePage = "$($StageReleasePath)\docs\$($Script:BuildEnv.ModuleToBuild).md"
 
+    # If the current module we are building is also loaded as a dependency with PSDepend,
+    # Unload it temporally and reload it from the scratchpath to build markdown files from.
+    if (Get-Module $Script:BuildEnv.ModuleToBuild  | Where-Object {$_.Path -like "*PSDepend\$($Script:BuildEnv.ModuleToBuild)*"}) {
+        $TempDeload = $true
+        while ($(Get-Module $Script:BuildEnv.ModuleToBuild)) {
+            Get-Module $Script:BuildEnv.ModuleToBuild | Remove-Module
+        }
+        $TempModule = Join-Path $ScratchPath "$($Script:BuildEnv.ModuleToBuild).psd1"
+        try {
+            [void](Import-Module $TempModule -Force)
+        }
+        catch {
+            throw "Unable to load the project module: $($ScatchModule)"
+        }
+    }#
+
     # Create the function .md files and the generic module page md as well for the distributable module
     $null = New-MarkdownHelp -module $Script:BuildEnv.ModuleToBuild -OutputFolder "$($StageReleasePath)\docs\" -Force -WithModulePage -Locale 'en-US' -FwLink $FwLink -HelpVersion $Script:BuildEnv.ModuleVersion -Encoding ([System.Text.Encoding]::($Script:BuildEnv.Encoding))
     $null = Update-MarkdownHelpModule -Path "$($StageReleasePath)\docs\" -Force -RefreshModulePage
+    # If modules where unloaded, reload them with PSDepend
+    if ($TempDeload) {
+        while ($(Get-Module $Script:BuildEnv.ModuleToBuild)) {
+            Get-Module $Script:BuildEnv.ModuleToBuild | Remove-Module
+        }
+        Invoke-PSDepend -Path $(Join-Path $BuildToolPath 'dependencies\PSDepend\build.depend.psd1') -Import -Force
+    }
     <#
      Replace each missing element we need for a proper generic module page .md file
      Also replace the blank Guid 00000000-0000-0000-0000-000000000000 with the actual module guid

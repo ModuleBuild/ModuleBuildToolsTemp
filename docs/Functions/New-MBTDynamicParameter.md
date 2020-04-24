@@ -30,29 +30,23 @@ New-MBTDynamicParameter [-CreateVariables] -BoundParameters <Object> [<CommonPar
 ## DESCRIPTION
 Helper function to simplify creating dynamic parameters.
 
-Example use cases:
-    Include parameters only if your environment dictates it
-    Include parameters depending on the value of a user-specified parameter
-    Provide tab completion and intellisense for parameters, depending on the environment
+Example use cases:     Include parameters only if your environment dictates it     Include parameters depending on the value of a user-specified parameter     Provide tab completion and intellisense for parameters, depending on the environment
 
-Please keep in mind that all dynamic parameters you create, will not have corresponding variables created.
-    Use New-DynamicParameter with 'CreateVariables' switch in your main code block,
-    ('Process' for advanced functions) to create those variables.
-    Alternatively, manually reference $PSBoundParameters for the dynamic parameter value.
+Please keep in mind that all dynamic parameters you create, will not have corresponding variables created. 
+Use New-DynamicParameter with 'CreateVariables' switch in your main code block,     ('Process' for advanced functions) to create those variables. 
+Alternatively, manually reference $PSBoundParameters for the dynamic parameter value.
 
 This function has two operating modes:
 
 1.
 All dynamic parameters created in one pass using pipeline input to the function.
-This mode allows to create dynamic parameters en masse,
-with one function call.
+This mode allows to create dynamic parameters en masse, with one function call.
 There is no need to create and maintain custom RuntimeDefinedParameterDictionary.
 
 2.
 Dynamic parameters are created by separate function calls and added to the RuntimeDefinedParameterDictionary you created beforehand.
 Then you output this RuntimeDefinedParameterDictionary to the pipeline.
-This allows more fine-grained control of the dynamic parameters,
-with custom conditions and so on.
+This allows more fine-grained control of the dynamic parameters, with custom conditions and so on.
 
 ## EXAMPLES
 
@@ -66,44 +60,14 @@ The Drive's parameter ValidateSet is populated with all available volumes on the
 
 Usage: Get-FreeSpace -Drive \<tab\>
 
-function Get-FreeSpace
-{
-    \[CmdletBinding()\]
-    Param()
-    DynamicParam
-    {
-        # Get drive names for ValidateSet attribute
-        $DriveList = (\[System.IO.DriveInfo\]::GetDrives()).Name
+function Get-FreeSpace {     \[CmdletBinding()\]     Param()     DynamicParam     {         # Get drive names for ValidateSet attribute         $DriveList = (\[System.IO.DriveInfo\]::GetDrives()).Name
 
-        # Create new dynamic parameter
-        New-DynamicParameter -Name Drive -ValidateSet $DriveList -Type (\[array\]) -Position 0 -Mandatory
-    }
+# Create new dynamic parameter         New-DynamicParameter -Name Drive -ValidateSet $DriveList -Type (\[array\]) -Position 0 -Mandatory     }
 
-    Process
-    {
-        # Dynamic parameters don't have corresponding variables created,
-        # you need to call New-DynamicParameter with CreateVariables switch to fix that.
-        New-DynamicParameter -CreateVariables -BoundParameters $PSBoundParameters
+Process     {         # Dynamic parameters don't have corresponding variables created,         # you need to call New-DynamicParameter with CreateVariables switch to fix that. 
+New-DynamicParameter -CreateVariables -BoundParameters $PSBoundParameters
 
-        $DriveInfo = \[System.IO.DriveInfo\]::GetDrives() | Where-Object {$Drive -contains $_.Name}
-        $DriveInfo |
-            ForEach-Object {
-                if(!$_.TotalFreeSpace)
-                {
-                    $FreePct = 0
-                }
-                else
-                {
-                    $FreePct = \[System.Math\]::Round(($_.TotalSize / $_.TotalFreeSpace), 2)
-                }
-                New-Object -TypeName psobject -Property @{
-                    Drive = $_.Name
-                    DriveType = $_.DriveType
-                    'Free(%)' = $FreePct
-                }
-            }
-    }
-}
+$DriveInfo = \[System.IO.DriveInfo\]::GetDrives() | Where-Object {$Drive -contains $_.Name}         $DriveInfo |             ForEach-Object {                 if(!$_.TotalFreeSpace)                 {                     $FreePct = 0                 }                 else                 {                     $FreePct = \[System.Math\]::Round(($ .TotalSize / $ .TotalFreeSpace), 2)                 }                 New-Object -TypeName psobject -Property @{                     Drive = $_.Name                     DriveType = $_.DriveType                     'Free(%)' = $FreePct                 }             }     } }
 
 ### EXAMPLE 2
 ```
@@ -116,77 +80,20 @@ Each parameter belongs to the different parameter set, so they are mutually excl
 The Drive's parameter ValidateSet is populated with all available volumes on the computer.
 The DriveType's parameter ValidateSet is populated with all available drive types.
 
-Usage: Get-FreeSpace -Drive \<tab\>
-    or
-Usage: Get-FreeSpace -DriveType \<tab\>
+Usage: Get-FreeSpace -Drive \<tab\>     or Usage: Get-FreeSpace -DriveType \<tab\>
 
 Parameters are defined in the array of hashtables, which is then piped through the New-Object to create PSObject and pass it to the New-DynamicParameter function.
 Because of piping, New-DynamicParameter function is able to create all parameters at once, thus eliminating need for you to create and pass external RuntimeDefinedParameterDictionary to it.
 
-function Get-FreeSpace
-{
-    \[CmdletBinding()\]
-    Param()
-    DynamicParam
-    {
-        # Array of hashtables that hold values for dynamic parameters
-        $DynamicParameters = @(
-            @{
-                Name = 'Drive'
-                Type = \[array\]
-                Position = 0
-                Mandatory = $true
-                ValidateSet = (\[System.IO.DriveInfo\]::GetDrives()).Name
-                ParameterSetName = 'Drive'
-            },
-            @{
-                Name = 'DriveType'
-                Type = \[array\]
-                Position = 0
-                Mandatory = $true
-                ValidateSet = \[System.Enum\]::GetNames('System.IO.DriveType')
-                ParameterSetName = 'DriveType'
-            }
-        )
+function Get-FreeSpace {     \[CmdletBinding()\]     Param()     DynamicParam     {         # Array of hashtables that hold values for dynamic parameters         $DynamicParameters = @(             @{                 Name = 'Drive'                 Type = \[array\]                 Position = 0                 Mandatory = $true                 ValidateSet = (\[System.IO.DriveInfo\]::GetDrives()).Name                 ParameterSetName = 'Drive'             },             @{                 Name = 'DriveType'                 Type = \[array\]                 Position = 0                 Mandatory = $true                 ValidateSet = \[System.Enum\]::GetNames('System.IO.DriveType')                 ParameterSetName = 'DriveType'             }         )
 
-        # Convert hashtables to PSObjects and pipe them to the New-DynamicParameter,
-        # to create all dynamic paramters in one function call.
-        $DynamicParameters | ForEach-Object {New-Object PSObject -Property $_} | New-DynamicParameter
-    }
-    Process
-    {
-        # Dynamic parameters don't have corresponding variables created,
-        # you need to call New-DynamicParameter with CreateVariables switch to fix that.
-        New-DynamicParameter -CreateVariables -BoundParameters $PSBoundParameters
+# Convert hashtables to PSObjects and pipe them to the New-DynamicParameter,         # to create all dynamic paramters in one function call. 
+$DynamicParameters | ForEach-Object {New-Object PSObject -Property $_} | New-DynamicParameter     }     Process     {         # Dynamic parameters don't have corresponding variables created,         # you need to call New-DynamicParameter with CreateVariables switch to fix that. 
+New-DynamicParameter -CreateVariables -BoundParameters $PSBoundParameters
 
-        if($Drive)
-        {
-            $Filter = {$Drive -contains $_.Name}
-        }
-        elseif($DriveType)
-        {
-            $Filter =  {$DriveType -contains  $_.DriveType}
-        }
+if($Drive)         {             $Filter = {$Drive -contains $_.Name}         }         elseif($DriveType)         {             $Filter =  {$DriveType -contains  $_.DriveType}         }
 
-        $DriveInfo = \[System.IO.DriveInfo\]::GetDrives() | Where-Object $Filter
-        $DriveInfo |
-            ForEach-Object {
-                if(!$_.TotalFreeSpace)
-                {
-                    $FreePct = 0
-                }
-                else
-                {
-                    $FreePct = \[System.Math\]::Round(($_.TotalSize / $_.TotalFreeSpace), 2)
-                }
-                New-Object -TypeName psobject -Property @{
-                    Drive = $_.Name
-                    DriveType = $_.DriveType
-                    'Free(%)' = $FreePct
-                }
-            }
-    }
-}
+$DriveInfo = \[System.IO.DriveInfo\]::GetDrives() | Where-Object $Filter         $DriveInfo |             ForEach-Object {                 if(!$_.TotalFreeSpace)                 {                     $FreePct = 0                 }                 else                 {                     $FreePct = \[System.Math\]::Round(($ .TotalSize / $ .TotalFreeSpace), 2)                 }                 New-Object -TypeName psobject -Property @{                     Drive = $_.Name                     DriveType = $_.DriveType                     'Free(%)' = $FreePct                 }             }     } }
 
 ### EXAMPLE 3
 ```
@@ -202,97 +109,24 @@ The DriveType's parameter ValidateSet is populated with all available drive type
 The DriveType's parameter ValidateSet is populated with all available drive types.
 The Precision's parameter controls number of digits after decimal separator for Free Space percentage.
 
-Usage: Get-FreeSpace -Drive \<tab\> -Precision 2
-    or
-Usage: Get-FreeSpace -DriveType \<tab\> -Precision 2
+Usage: Get-FreeSpace -Drive \<tab\> -Precision 2     or Usage: Get-FreeSpace -DriveType \<tab\> -Precision 2
 
 Parameters are defined in the array of hashtables, which is then piped through the New-Object to create PSObject and pass it to the New-DynamicParameter function.
 If parameter with the same name already exist in the RuntimeDefinedParameterDictionary, a new Parameter Set is added to it.
 Because of piping, New-DynamicParameter function is able to create all parameters at once, thus eliminating need for you to create and pass external RuntimeDefinedParameterDictionary to it.
 
-function Get-FreeSpace
-{
-    \[CmdletBinding()\]
-    Param()
-    DynamicParam
-    {
-        # Array of hashtables that hold values for dynamic parameters
-        $DynamicParameters = @(
-            @{
-                Name = 'Drive'
-                Type = \[array\]
-                Position = 0
-                Mandatory = $true
-                ValidateSet = (\[System.IO.DriveInfo\]::GetDrives()).Name
-                ParameterSetName = 'Drive'
-            },
-            @{
-                Name = 'DriveType'
-                Type = \[array\]
-                Position = 0
-                Mandatory = $true
-                ValidateSet = \[System.Enum\]::GetNames('System.IO.DriveType')
-                ParameterSetName = 'DriveType'
-            },
-            @{
-                Name = 'Precision'
-                Type = \[int\]
-                # This will add a Drive parameter set to the parameter
-                Position = 1
-                ParameterSetName = 'Drive'
-            },
-            @{
-                Name = 'Precision'
-                # Because the parameter already exits in the RuntimeDefinedParameterDictionary,
-                # this will add a DriveType parameter set to the parameter.
-                Position = 1
-                ParameterSetName = 'DriveType'
-            }
-        )
+function Get-FreeSpace {     \[CmdletBinding()\]     Param()     DynamicParam     {         # Array of hashtables that hold values for dynamic parameters         $DynamicParameters = @(             @{                 Name = 'Drive'                 Type = \[array\]                 Position = 0                 Mandatory = $true                 ValidateSet = (\[System.IO.DriveInfo\]::GetDrives()).Name                 ParameterSetName = 'Drive'             },             @{                 Name = 'DriveType'                 Type = \[array\]                 Position = 0                 Mandatory = $true                 ValidateSet = \[System.Enum\]::GetNames('System.IO.DriveType')                 ParameterSetName = 'DriveType'             },             @{                 Name = 'Precision'                 Type = \[int\]                 # This will add a Drive parameter set to the parameter                 Position = 1                 ParameterSetName = 'Drive'             },             @{                 Name = 'Precision'                 # Because the parameter already exits in the RuntimeDefinedParameterDictionary,                 # this will add a DriveType parameter set to the parameter. 
+Position = 1                 ParameterSetName = 'DriveType'             }         )
 
-        # Convert hashtables to PSObjects and pipe them to the New-DynamicParameter,
-        # to create all dynamic paramters in one function call.
-        $DynamicParameters | ForEach-Object {New-Object PSObject -Property $_} | New-DynamicParameter
-    }
-    Process
-    {
-        # Dynamic parameters don't have corresponding variables created,
-        # you need to call New-DynamicParameter with CreateVariables switch to fix that.
-        New-DynamicParameter -CreateVariables -BoundParameters $PSBoundParameters
+# Convert hashtables to PSObjects and pipe them to the New-DynamicParameter,         # to create all dynamic paramters in one function call. 
+$DynamicParameters | ForEach-Object {New-Object PSObject -Property $_} | New-DynamicParameter     }     Process     {         # Dynamic parameters don't have corresponding variables created,         # you need to call New-DynamicParameter with CreateVariables switch to fix that. 
+New-DynamicParameter -CreateVariables -BoundParameters $PSBoundParameters
 
-        if($Drive)
-        {
-            $Filter = {$Drive -contains $_.Name}
-        }
-        elseif($DriveType)
-        {
-            $Filter = {$DriveType -contains  $_.DriveType}
-        }
+if($Drive)         {             $Filter = {$Drive -contains $_.Name}         }         elseif($DriveType)         {             $Filter = {$DriveType -contains  $_.DriveType}         }
 
-        if(!$Precision)
-        {
-            $Precision = 2
-        }
+if(!$Precision)         {             $Precision = 2         }
 
-        $DriveInfo = \[System.IO.DriveInfo\]::GetDrives() | Where-Object $Filter
-        $DriveInfo |
-            ForEach-Object {
-                if(!$_.TotalFreeSpace)
-                {
-                    $FreePct = 0
-                }
-                else
-                {
-                    $FreePct = \[System.Math\]::Round(($_.TotalSize / $_.TotalFreeSpace), $Precision)
-                }
-                New-Object -TypeName psobject -Property @{
-                    Drive = $_.Name
-                    DriveType = $_.DriveType
-                    'Free(%)' = $FreePct
-                }
-            }
-    }
-}
+$DriveInfo = \[System.IO.DriveInfo\]::GetDrives() | Where-Object $Filter         $DriveInfo |             ForEach-Object {                 if(!$_.TotalFreeSpace)                 {                     $FreePct = 0                 }                 else                 {                     $FreePct = \[System.Math\]::Round(($ .TotalSize / $ .TotalFreeSpace), $Precision)                 }                 New-Object -TypeName psobject -Property @{                     Drive = $_.Name                     DriveType = $_.DriveType                     'Free(%)' = $FreePct                 }             }     } }
 
 ### EXAMPLE 4
 ```
@@ -302,79 +136,22 @@ Create dynamic parameters using custom dictionary.
 In case you need more control, use custom dictionary to precisely choose what dynamic parameters to create and when.
 The example below will create DriveType dynamic parameter only if today is not a Friday:
 
-function Get-FreeSpace
-{
-    \[CmdletBinding()\]
-    Param()
-    DynamicParam
-    {
-        $Drive = @{
-            Name = 'Drive'
-            Type = \[array\]
-            Position = 0
-            Mandatory = $true
-            ValidateSet = (\[System.IO.DriveInfo\]::GetDrives()).Name
-            ParameterSetName = 'Drive'
-        }
+function Get-FreeSpace {     \[CmdletBinding()\]     Param()     DynamicParam     {         $Drive = @{             Name = 'Drive'             Type = \[array\]             Position = 0             Mandatory = $true             ValidateSet = (\[System.IO.DriveInfo\]::GetDrives()).Name             ParameterSetName = 'Drive'         }
 
-        $DriveType =  @{
-            Name = 'DriveType'
-            Type = \[array\]
-            Position = 0
-            Mandatory = $true
-            ValidateSet = \[System.Enum\]::GetNames('System.IO.DriveType')
-            ParameterSetName = 'DriveType'
-        }
+$DriveType =  @{             Name = 'DriveType'             Type = \[array\]             Position = 0             Mandatory = $true             ValidateSet = \[System.Enum\]::GetNames('System.IO.DriveType')             ParameterSetName = 'DriveType'         }
 
-        # Create dictionary
-        $DynamicParameters = New-Object System.Management.Automation.RuntimeDefinedParameterDictionary
+# Create dictionary         $DynamicParameters = New-Object System.Management.Automation.RuntimeDefinedParameterDictionary
 
-        # Add new dynamic parameter to dictionary
-        New-DynamicParameter @Drive -Dictionary $DynamicParameters
+# Add new dynamic parameter to dictionary         New-DynamicParameter @Drive -Dictionary $DynamicParameters
 
-        # Add another dynamic parameter to dictionary, only if today is not a Friday
-        if((Get-Date).DayOfWeek -ne \[DayOfWeek\]::Friday)
-        {
-            New-DynamicParameter @DriveType -Dictionary $DynamicParameters
-        }
+# Add another dynamic parameter to dictionary, only if today is not a Friday         if((Get-Date).DayOfWeek -ne \[DayOfWeek\]::Friday)         {             New-DynamicParameter @DriveType -Dictionary $DynamicParameters         }
 
-        # Return dictionary with dynamic parameters
-        $DynamicParameters
-    }
-    Process
-    {
-        # Dynamic parameters don't have corresponding variables created,
-        # you need to call New-DynamicParameter with CreateVariables switch to fix that.
-        New-DynamicParameter -CreateVariables -BoundParameters $PSBoundParameters
+# Return dictionary with dynamic parameters         $DynamicParameters     }     Process     {         # Dynamic parameters don't have corresponding variables created,         # you need to call New-DynamicParameter with CreateVariables switch to fix that. 
+New-DynamicParameter -CreateVariables -BoundParameters $PSBoundParameters
 
-        if($Drive)
-        {
-            $Filter = {$Drive -contains $_.Name}
-        }
-        elseif($DriveType)
-        {
-            $Filter =  {$DriveType -contains  $_.DriveType}
-        }
+if($Drive)         {             $Filter = {$Drive -contains $_.Name}         }         elseif($DriveType)         {             $Filter =  {$DriveType -contains  $_.DriveType}         }
 
-        $DriveInfo = \[System.IO.DriveInfo\]::GetDrives() | Where-Object $Filter
-        $DriveInfo |
-            ForEach-Object {
-                if(!$_.TotalFreeSpace)
-                {
-                    $FreePct = 0
-                }
-                else
-                {
-                    $FreePct = \[System.Math\]::Round(($_.TotalSize / $_.TotalFreeSpace), 2)
-                }
-                New-Object -TypeName psobject -Property @{
-                    Drive = $_.Name
-                    DriveType = $_.DriveType
-                    'Free(%)' = $FreePct
-                }
-            }
-    }
-}
+$DriveInfo = \[System.IO.DriveInfo\]::GetDrives() | Where-Object $Filter         $DriveInfo |             ForEach-Object {                 if(!$_.TotalFreeSpace)                 {                     $FreePct = 0                 }                 else                 {                     $FreePct = \[System.Math\]::Round(($ .TotalSize / $ .TotalFreeSpace), 2)                 }                 New-Object -TypeName psobject -Property @{                     Drive = $_.Name                     DriveType = $_.DriveType                     'Free(%)' = $FreePct                 }             }     } }
 
 ## PARAMETERS
 
@@ -716,8 +493,7 @@ Accept wildcard characters: False
 If specified, add resulting RuntimeDefinedParameter to an existing RuntimeDefinedParameterDictionary.
 Appropriate for custom dynamic parameters creation.
 
-If not specified, create and return a RuntimeDefinedParameterDictionary
-Aappropriate for a simple dynamic parameter creation.
+If not specified, create and return a RuntimeDefinedParameterDictionary Aappropriate for a simple dynamic parameter creation.
 
 ```yaml
 Type: Object
@@ -747,8 +523,7 @@ Accept wildcard characters: False
 ```
 
 ### -BoundParameters
-System.Management.Automation.PSBoundParametersDictionary is an internal sealed class,
-so one can't use PowerShell's '-is' operator to validate type.
+System.Management.Automation.PSBoundParametersDictionary is an internal sealed class, so one can't use PowerShell's '-is' operator to validate type.
 
 ```yaml
 Type: Object
@@ -770,10 +545,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## OUTPUTS
 
 ## NOTES
-Credits to jrich523 and ramblingcookiemonster for their initial code and inspiration:
-    https://github.com/RamblingCookieMonster/PowerShell/blob/master/New-DynamicParam.ps1
-    http://ramblingcookiemonster.wordpress.com/2014/11/27/quick-hits-credentials-and-dynamic-parameters/
-    http://jrich523.wordpress.com/2013/05/30/powershell-simple-way-to-add-dynamic-parameters-to-advanced-function/
+Credits to jrich523 and ramblingcookiemonster for their initial code and inspiration:     https://github.com/RamblingCookieMonster/PowerShell/blob/master/New-DynamicParam.ps1     http://ramblingcookiemonster.wordpress.com/2014/11/27/quick-hits-credentials-and-dynamic-parameters/     http://jrich523.wordpress.com/2013/05/30/powershell-simple-way-to-add-dynamic-parameters-to-advanced-function/
 
 Credit to BM for alias and type parameters and their handling
 

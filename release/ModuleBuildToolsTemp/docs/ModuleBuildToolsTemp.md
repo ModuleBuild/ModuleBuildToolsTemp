@@ -1,6 +1,6 @@
 ﻿---
 Module Name: ModuleBuildToolsTemp
-Module Guid: c93e4433-f934-4406-8cd7-b96ec67cc04b c93e4433-f934-4406-8cd7-b96ec67cc04b
+Module Guid: c93e4433-f934-4406-8cd7-b96ec67cc04b
 Download Help Link: https://www.github.com/justin-p/ModuleBuildToolsTemp/release/ModuleBuildToolsTemp/docs/ModuleBuildToolsTemp.md
 Help Version: 0.0.7
 Locale: en-US
@@ -11,12 +11,6 @@ Locale: en-US
 Builder tools for the ModuleBuild project
 
 ## ModuleBuildToolsTemp Cmdlets
-### [Get-MBTBuildEnvironment](Get-MBTBuildEnvironment.md)
-Retrieves all the stored settings in a buildenvironment.json file.
-
-### [Set-MBTBuildEnvironment](Set-MBTBuildEnvironment.md)
-Sets a stored setting in a buildenvironment.json file.
-
 ### [Get-MBTSpecialPath](Get-MBTSpecialPath.md)
 Get SpecialFolder defined in Environment variables
 
@@ -28,9 +22,6 @@ Finds all signed ps1 and psm1 files recursively from the current  or defined pat
 
 ### [Get-MBTFunctionParameter](Get-MBTFunctionParameter.md)
 Return all parameters for each function found in a code block.
-
-### [New-MBTDynamicParameter](New-MBTDynamicParameter.md)
-Helper function to simplify creating dynamic parameters
 
 ### [Out-MBTZip](Out-MBTZip.md)
 TBD

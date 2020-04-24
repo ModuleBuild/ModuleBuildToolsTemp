@@ -1,7 +1,7 @@
 ---
 external help file: ModuleBuildToolsTemp-help.xml
 Module Name: ModuleBuildToolsTemp
-online version: https://github.com/zloeber/ModuleBuild
+online version:
 schema: 2.0.0
 ---
 
